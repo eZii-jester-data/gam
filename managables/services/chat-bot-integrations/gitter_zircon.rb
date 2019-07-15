@@ -307,6 +307,15 @@ class GitterDumbDevBot
     if message =~ /\Amelt\Z/
       # First step, assigning a variable
       @melting_point = @melting_point_receivables.sample
+
+      def liqudify(raw_data_object)
+        # https://stackoverflow.com/a/24076936/4132642
+        i_ptr_int = raw_data_object.object_id << 1
+        # https://stackoverflow.com/questions/47757960/how-to-get-value-at-a-memory-address-in-linux-shell
+        
+      end
+      liqudify(@melting_point)
+
       # Next step, doing something intelligent with the data
       # loosening it up somehow
       # LIQUIDIFYING IT
