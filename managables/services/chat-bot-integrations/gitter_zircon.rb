@@ -132,7 +132,7 @@ class NeuralNetwork
       #{@brainz.instance_variables}
       ```
     HUMAN_SCRIPT_INTROSPECT_FOR_DISCORD
-  
+
     if very_verbose
       var = <<~HUMAN_SCRIPT_INTROSPECT_FOR_DISCORD
         ```
@@ -145,7 +145,7 @@ class NeuralNetwork
       HUMAN_SCRIPT_INTROSPECT_FOR_DISCORD
     end
 
-    
+
     unless @brainz.network.nil?
       # var += <<~HUMAN_SCRIPT_INTROSPECT_FOR_DISCORD
       #   ```
@@ -153,7 +153,7 @@ class NeuralNetwork
       #   #{@brainz.network.hidden.to_s}
       #   #{@brainz.network.output.to_s}
       #   ```
-      # HUMAN_SCRIPT_INTROSPECT_FOR_DISCORD 
+      # HUMAN_SCRIPT_INTROSPECT_FOR_DISCORD
     end
 
     return var
@@ -177,7 +177,7 @@ class GitterDumbDevBot
   def initialize
     @currently_selected_project = "lemonandroid/gam"
     @variables_for_chat_users = Hash.new
-    @players = Hash.new do |dictionary, identifier| 
+    @players = Hash.new do |dictionary, identifier|
       dictionary[identifier] = Hash.new
     end
     @melting_point_receivables = []
@@ -207,7 +207,7 @@ class GitterDumbDevBot
     -X POST 'https://api.twitch.tv/helix/clips?broadcaster_id=#{twitch_broadcaster_id}'`
 
     created_clip_json_response = JSON.parse(created_clip_json_response)
-    
+
     id = created_clip_json_response["data"][0]["id"]
     return "https://clips.twitch.tv/#{id}"
 
@@ -227,7 +227,7 @@ class GitterDumbDevBot
 
     "`#{sub_zero_string.unpack('c*')}`"
   end
-  
+
   def on_message(message)
     message.gsub!(EEZEE_PREFIX, '')
 
@@ -300,7 +300,7 @@ class GitterDumbDevBot
 
         projects = Bugsnag::Api.projects(organization[:id])
 
-        
+
         errors = Bugsnag::Api.errors(projects[0][:id], nil)
 
         return errors.inspect[0...500]
@@ -345,7 +345,7 @@ class GitterDumbDevBot
         # https://stackoverflow.com/a/24076936/4132642
         i_ptr_int = raw_data_object.object_id << 1
         # https://stackoverflow.com/questions/47757960/how-to-get-value-at-a-memory-address-in-linux-shell
-        
+
       end
       liqudify(@melting_point)
 
@@ -371,8 +371,8 @@ class GitterDumbDevBot
         URL
         #{url}
       """
-    end 
-    
+    end
+
     if message =~ /\Awhat do you think?\Z/i
       return "I think you're a stupid piece of shit and your dick smells worse than woz before he invented the home computer."
     end
@@ -397,7 +397,7 @@ class GitterDumbDevBot
       variable_identifier_used_by_chat_user = $1
 
       if(variable_value_used_by_chat_user =~ /`(.*)`/)
-        variable_value_used_by_chat_user = eval($1)          
+        variable_value_used_by_chat_user = eval($1)
       end
 
       @variables_for_chat_users[variable_identifier_used_by_chat_user] = variable_value_used_by_chat_user
@@ -517,7 +517,7 @@ class GitterDumbDevBot
 
     client.run!
   end
-  
+
   def all_unix_process_ids(unix_id)
     descendant_pids(unix_id) + [unix_id]
   end
@@ -537,7 +537,7 @@ class GitterDumbDevBot
       end tell
     OSA_SCRIPT
   end
-  
+
   def get_window_position_and_size(unix_pid)
     possibly_window_bounds = run_osa_script(apple_script_window_position_and_size(unix_pid))
 
@@ -560,7 +560,7 @@ class GitterDumbDevBot
           stderr = ''
           process = Open4.bg(hopefully_bash_command, 0 => '', 1 => stdout, 2 => stderr)
           sleep 1
-          
+
           texts_array = space_2_unicode_array(stdout.split("\n"))
           texts_array += space_2_unicode_array(stderr.split("\n"))
           texts_array + screen_captures_of_visual_processes(process.pid)
@@ -604,7 +604,7 @@ class GitterDumbDevBot
 
   def ten_most_pushed_to_github_repos
     output = `curl https://api.github.com/users/LemonAndroid/repos`
-    
+
     processed_output = JSON
     .parse(output)
     .sort_by do |project|
@@ -614,7 +614,7 @@ class GitterDumbDevBot
     .map do |project|
       project["full_name"]
     end
-    
+
     space_2_unicode_array(processed_output)
   end
 
