@@ -12,3 +12,5 @@ gem 'bundler'
 gem 'sinatra'
 
 gem 'nokogiri'
+
+gem 'bugsnag'

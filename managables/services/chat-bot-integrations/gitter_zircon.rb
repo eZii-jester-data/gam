@@ -31,6 +31,17 @@ require 'bundler'
 require 'sinatra'
 require 'nokogiri'
 
+require "sinatra"
+require "bugsnag"
+
+Bugsnag.configure do |config|
+  config.api_key = "3bda845ddbc9ddabefbdabb3a8cda431"
+end
+
+set :raise_errors, true
+
+use Bugsnag::Rack
+
 # class Object
 #   def ===(method, *args, &block)
       # TODO: also alllow Module === object => true if Module::Class === object => true
@@ -67,6 +78,7 @@ ALLOWED_MESSAGES_LIST = [
   "bring to melting point last used picture",
   "probe https://www.twitch.tv/jamiepinelive 10s",
   "probe https://www.twitch.tv/sudokid 5s",
+  "probe https://www.twitch.tv/dowright 5s",
   "probe https://github.com/facebook/relay/commit/377ca939b5f5b46d57e11d4a1dfa7c4aecf5666b 50bytes",
   "probe https://github.com/facebook/relay/commit/377ca939b5f5b46d57e11d4a1dfa7c4aecf5666b 150bytes",
   "bring probes to melting point"
@@ -148,6 +160,10 @@ class NeuralNetwork
 
   def to_s
     verbose_introspect
+  end
+
+  def num_hidden
+    puts 'wau'
   end
 
 end
