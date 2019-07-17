@@ -30,9 +30,9 @@ require 'brainz'
 require 'bundler'
 require 'sinatra'
 require 'nokogiri'
-
-require "sinatra"
-require "bugsnag"
+require 'sinatra'
+require 'bugsnag'
+require 'bugsnag/api'
 
 Bugsnag.configure do |config|
   config.api_key = "3bda845ddbc9ddabefbdabb3a8cda431"
@@ -81,7 +81,8 @@ ALLOWED_MESSAGES_LIST = [
   "probe https://www.twitch.tv/dowright 5s",
   "probe https://github.com/facebook/relay/commit/377ca939b5f5b46d57e11d4a1dfa7c4aecf5666b 50bytes",
   "probe https://github.com/facebook/relay/commit/377ca939b5f5b46d57e11d4a1dfa7c4aecf5666b 150bytes",
-  "bring probes to melting point"
+  "bring probes to melting point",
+  "throw bugsnag bomb"
 ].map do |message|
   optional_prefix(EEZEE_PREFIX, message)
 end.flatten
@@ -288,7 +289,23 @@ class GitterDumbDevBot
       return "hey"
     end
 
-    if message =~ /\Athrow bomb\Z/i
+    if message =~ /\Athrow (?:(.*)\s)?bomb\Z/i
+      if $1 == "bugsnag"
+        Bugsnag::Api.configure do |config|
+          config.auth_token = ENV["BUGSNAG_TOKEN"]
+        end
+        organizations = Bugsnag::Api.organizations
+
+        organization = organizations.first
+
+        projects = Bugsnag::Api.projects(organization[:id])
+
+        
+        errors = Bugsnag::Api.errors(projects[0][:id], nil)
+
+        return errors.inspect[0...500]
+      end
+
       return """
         ```
           Local variables (5 first)

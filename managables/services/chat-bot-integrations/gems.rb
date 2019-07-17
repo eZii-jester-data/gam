@@ -14,3 +14,5 @@ gem 'sinatra'
 gem 'nokogiri'
 
 gem 'bugsnag'
+
+gem 'bugsnag-api'
