@@ -6,3 +6,5 @@ gem 'os'
 
 gem 'byebug'
 gem 'pry-remote'
+
+gem 'wit'

@@ -3,6 +3,11 @@ require_relative 'shapes/cube.rb'
 require 'pry-remote'
 require 'ast'
 require 'byebug'
+require 'wit'
+
+
+
+
 
 # Monkey patching Object like it's the golden old days
 
@@ -368,6 +373,16 @@ class Gam
   def start
     @renderer.window.run do
       @renderer.render(@scene, @camera)
+    end
+  end
+
+  def move_cube(which_one = :any, a, b, c)
+    case which_one
+    when :any
+      cube = CUBES.sample
+      cube.position.x = a
+      cube.position.y = b
+      cube.position.z = c
     end
   end
 end

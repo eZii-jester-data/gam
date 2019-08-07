@@ -58,6 +58,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    wit (6.0.0)
 
 PLATFORMS
   ruby
@@ -68,6 +69,7 @@ DEPENDENCIES
   os
   pry-remote
   steep
+  wit
 
 BUNDLED WITH
    2.0.2
