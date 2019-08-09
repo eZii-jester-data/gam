@@ -7,5 +7,5 @@ You are in a maze of twisty passages, all alike.
 >
 
 =
-#dowright
+#ezii_tm_registerred
 Nebuchadnezzar

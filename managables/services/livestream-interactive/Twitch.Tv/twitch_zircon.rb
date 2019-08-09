@@ -22,7 +22,7 @@ def start
     puts ">>> #{message.from}: #{message.body}".colorize(colors.sample)
     LOG_FILE.write(message.body.to_s + "\n")
     if message.body == "Nebuchadnezzar"
-      open("ruby ./zion_fleet.rb") do |∫|
+      open("|ruby /Users/lemonandroid/eezee1/managables/services/livestream-interactive/Twitch.Tv/zion_fleet.rb") do |∫|
         while response = ∫.gets
           client.privmsg("#ezii_tm_registerred", response)
         end
