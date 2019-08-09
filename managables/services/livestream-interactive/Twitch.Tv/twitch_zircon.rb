@@ -11,7 +11,7 @@ def start
   client = Zircon.new(
     server: 'irc.twitch.tv',
     port: '6667',
-    channel: '#dowright',
+    channel: '#jamiepinelive',
     username: 'ezii_tm_registerred',
     password: ENV["EZE_TWITCH_TOKEN_CHAT"]
   )
@@ -38,7 +38,7 @@ def start
               url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(response))
               response = Net::HTTP.get(url)
               puts response
-              client.privmsg("#dowright", response.gsub(/\s/, '.')) if !response.empty?
+              client.privmsg("#jamiepinelive", response.gsub(/\s/, '.')) if !response.empty?
             end
           end 
         end
@@ -49,7 +49,7 @@ def start
       url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(message.body))
       response = Net::HTTP.get(url)
       puts response
-      client.privmsg("#dowright", response) if !response.empty?
+      client.privmsg("#jamiepinelive", response) if !response.empty?
     end
   end
 
