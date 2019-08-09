@@ -10,7 +10,7 @@ def start
   client = Zircon.new(
     server: 'irc.twitch.tv',
     port: '6667',
-    channel: '#dowright',
+    channel: '#ezii_tm_registerred',
     username: 'ezii_tm_registerred',
     password: ENV["EZE_TWITCH_TOKEN_CHAT"]
   )
@@ -22,7 +22,7 @@ def start
     puts ">>> #{message.from}: #{message.body}".colorize(colors.sample)
     LOG_FILE.write(message.body.to_s + "\n")
     if message.body == "Nebuchadnezzar"
-      open("ruby zion_fleet.rb") do |∫|
+      open("ruby ./zion_fleet.rb") do |∫|
         while response = ∫.gets
           client.privmsg("#ezii_tm_registerred", response)
         end
@@ -33,7 +33,7 @@ def start
       url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(message.body))
       response = Net::HTTP.get(url)
       puts response
-      client.privmsg("#dowright", response) if !response.empty?
+      client.privmsg("#ezii_tm_registerred", response) if !response.empty?
     end
   end
 
