@@ -24,7 +24,9 @@ def start
     if message.body == "Nebuchadnezzar"
       open("|ruby /Users/lemonandroid/eezee1/managables/services/livestream-interactive/Twitch.Tv/zion_fleet.rb") do |∫|
         while response = ∫.gets
-          client.privmsg("#ezii_tm_registerred", response)
+          response.each_line do |line|
+            client.privmsg("#ezii_tm_registerred", line)
+          end
         end
       end
     end
