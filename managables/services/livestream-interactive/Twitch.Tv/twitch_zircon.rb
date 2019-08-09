@@ -21,6 +21,13 @@ def start
   client.on_message do |message|
     puts ">>> #{message.from}: #{message.body}".colorize(colors.sample)
     LOG_FILE.write(message.body.to_s + "\n")
+    if message.body = "Nebuchadnezzar"
+      open("ruby zion_fleet.rb") do |∫|
+        while response = ∫.gets
+          client.privmsg("#ezii_tm_registerred", response)
+        end
+      end
+    end
 
     if message.body
       url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(message.body))
