@@ -1,6 +1,5 @@
 require 'zircon'
 require 'colorize'
-require 'byebug'
 require 'net/http'
 require 'cgi'
 LOG_FILE = File.open('chat.txt', 'w')
@@ -31,9 +30,9 @@ def start
               i += 1
               next if i < 20
               SCREEN.push(response)
-              if rand < 0.00001
-                byebug
-              end
+              # if rand < 0.00001
+              #   byebug
+              # end
   
               url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(response))
               response = Net::HTTP.get(url)
