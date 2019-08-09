@@ -24,21 +24,24 @@ def start
     if message.body == "Nebuchadnezzar"
       Thread.new do
         i = 0
-        open("|ruby ./zion_fleet.rb") do |∫|
-          while response = ∫.gets
-            i += 1
-            next if i < 20
-            SCREEN.push(response)
-            if rand < 0.00001
-              byebug
+        puts `ls`
+        Dir.chdir("managables/services/livestream-interactive/Twitch.Tv/") do
+          open("|ruby zion_fleet.rb") do |∫|
+            while response = ∫.gets
+              i += 1
+              next if i < 20
+              SCREEN.push(response)
+              if rand < 0.00001
+                byebug
+              end
+  
+              url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(response))
+              response = Net::HTTP.get(url)
+              puts response
+              client.privmsg("#dowright", response.gsub(/\s/, '.')) if !response.empty?
             end
-
-            url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(response))
-            response = Net::HTTP.get(url)
-            puts response
-            client.privmsg("#dowright", response.gsub(/\s/, '.')) if !response.empty?
-          end
-        end 
+          end 
+        end
       end
     end
 
