@@ -1,6 +1,6 @@
 GEM
+  remote: https://rubygems.org/
   specs:
-    byebug (11.0.1)
     colorize (0.8.1)
     rack (2.0.7)
     zircon (0.0.8)
@@ -9,7 +9,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   colorize
   rack
   zircon
