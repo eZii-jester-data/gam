@@ -24,7 +24,7 @@ def start
     if message.body == "Nebuchadnezzar"
       Thread.new do
         i = 0
-        open("|ruby /Users/lemonandroid/eezee1/managables/services/livestream-interactive/Twitch.Tv/zion_fleet.rb") do |∫|
+        open("|ruby ./zion_fleet.rb") do |∫|
           while response = ∫.gets
             i += 1
             next if i < 20
@@ -36,9 +36,9 @@ def start
             url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(response))
             response = Net::HTTP.get(url)
             puts response
-            client.privmsg("#dowright", response) if !response.empty?
+            client.privmsg("#dowright", response.gsub(/\s/, '.')) if !response.empty?
           end
-        end
+        end 
       end
     end
 
