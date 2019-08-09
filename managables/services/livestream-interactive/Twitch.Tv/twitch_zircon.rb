@@ -6,11 +6,13 @@ LOG_FILE = File.open('chat.txt', 'w')
 
 SCREEN = []
 
+TWITCH_CHANNEL = '#' + ENV["TWITCH_CHANNEL"]
+
 def start
   client = Zircon.new(
     server: 'irc.twitch.tv',
     port: '6667',
-    channel: '#jamiepinelive',
+    channel: TWITCH_CHANNEL,
     username: 'ezii_tm_registerred',
     password: ENV["EZE_TWITCH_TOKEN_CHAT"]
   )
@@ -37,7 +39,7 @@ def start
               url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(response))
               response = Net::HTTP.get(url)
               puts response
-              client.privmsg("#jamiepinelive", response.gsub(/\s/, '.')) if !response.empty?
+              client.privmsg(TWITCH_CHANNEL, response.gsub(/\s/, '.')) if !response.empty?
             end
           end 
         end
@@ -48,7 +50,7 @@ def start
       url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(message.body))
       response = Net::HTTP.get(url)
       puts response
-      client.privmsg("#jamiepinelive", response) if !response.empty?
+      client.privmsg(TWITCH_CHANNEL, response) if !response.empty?
     end
   end
 
