@@ -22,13 +22,22 @@ def start
     puts ">>> #{message.from}: #{message.body}".colorize(colors.sample)
     LOG_FILE.write(message.body.to_s + "\n")
     if message.body == "Nebuchadnezzar"
-      open("|ruby /Users/lemonandroid/eezee1/managables/services/livestream-interactive/Twitch.Tv/zion_fleet.rb") do |∫|
-        while response = ∫.gets
-          SCREEN.push(response)
-          if rand < 0.1
-            byebug
+      Thread.new do
+        i = 0
+        open("|ruby /Users/lemonandroid/eezee1/managables/services/livestream-interactive/Twitch.Tv/zion_fleet.rb") do |∫|
+          while response = ∫.gets
+            i += 1
+            next if i < 20
+            SCREEN.push(response)
+            if rand < 0.00001
+              byebug
+            end
+
+            url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(response))
+            response = Net::HTTP.get(url)
+            puts response
+            client.privmsg("#dowright", response) if !response.empty?
           end
-          # client.privmsg("#dowright", response.gsub(/\s/, '.'))
         end
       end
     end
