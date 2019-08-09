@@ -12,7 +12,7 @@ end
 #
 # terminal configuration 
 Kernel.system "tput civis; stty -icanon -echo; resize -s 30 120; clear"
-height, width = $stdout.winsize
+height, width = 100, 100
 # Ship initial position, speed and fired missiles
 lvl     = 0
 y_pos   = 10
