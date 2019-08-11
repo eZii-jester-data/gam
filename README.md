@@ -3,3 +3,14 @@
 # gam
 
 Game Aided Manufacturing
+
+
+
+```ruby
+
+# ENV variables for heroku
+
+
+TWITCH_CHANNEL
+
+```
