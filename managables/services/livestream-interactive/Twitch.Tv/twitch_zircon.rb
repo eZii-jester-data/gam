@@ -36,7 +36,7 @@ def start
               #   byebug
               # end
   
-              url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(response))
+              url = URI.parse('https://ezii-server.herokuapp.com/' + '?message=' + CGI.escape(response))
               response = Net::HTTP.get(url)
               puts response
               client.privmsg(TWITCH_CHANNEL, response.gsub(/\s/, '.')) if !response.empty?
@@ -47,7 +47,7 @@ def start
     end
 
     if message.body
-      url = URI.parse('https://eezee-9.herokuapp.com' + '?message=' + CGI.escape(message.body))
+      url = URI.parse('https://ezii-server.herokuapp.com/' + '?message=' + CGI.escape(message.body))
       response = Net::HTTP.get(url)
       puts response
       client.privmsg(TWITCH_CHANNEL, response) if !response.empty?
